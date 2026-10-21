@@ -1,0 +1,28 @@
+#table .column-hider-hidden {
+    display: none !important;
+}
+
+.column-hider {
+    margin: 0.75em 0;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.column-hider > summary {
+    cursor: pointer;
+}
+
+.column-hider-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3em;
+    max-height: 20em;
+    overflow: auto;
+    padding: 0.5em;
+    border: 1px solid currentColor;
+}
+
+.column-hider-list label {
+    overflow-wrap: anywhere;
+}
