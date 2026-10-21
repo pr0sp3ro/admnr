@@ -62,3 +62,9 @@ Serve `index.php` with PHP and the database extensions you need. Create a privat
 - SQL formatting uses local assets.
 
 Column visibility, table groups, sidebar width, and default query favorites are stored in the current browser. Hiding columns changes presentation only.
+
+## License
+
+Original configuration, documentation, and modifications in this project are licensed under the [MIT License](LICENSE), copyright 2026 [Synframe Labs](https://synframe.eu).
+
+Adminer 6.1.2 is available under Apache-2.0 or GPL-2.0, as stated in its source header. Bundled third-party plugins, libraries, and theme code retain their respective licenses and copyright notices. The MIT License above applies only to this project's original contributions and does not replace third-party licenses. The bundled sql-formatter license is included in [adminer-plugins/assets/sql-formatter.LICENSE](adminer-plugins/assets/sql-formatter.LICENSE).
