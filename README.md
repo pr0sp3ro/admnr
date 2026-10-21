@@ -36,7 +36,7 @@ Serve `index.php` with PHP and the database extensions you need. Create a privat
 | `highlight-codemirror` | Adds CodeMirror highlighting and SQL completion. Loads assets from a CDN. |
 | `human-readable-size` | Displays storage sizes in readable units. |
 | `input-uuid-generator` | Adds UUID generation to matching fields. |
-| `json-preview` | Adds collapsible JSON previews. |
+| `json-preview` | Opens formatted JSON in a modal without expanding table rows. |
 | `login-password-less` | Allows passwordless database login through a configured password hash. |
 | `pretty-json-column` | Formats JSON for editing and validates it before form submission. |
 | `readable-dates` | Displays selected UNIX timestamps as local dates. Click to toggle the raw value. |
@@ -58,7 +58,7 @@ Serve `index.php` with PHP and the database extensions you need. Create a privat
 - Filter autocomplete includes a JavaScript syntax fix, CSRF validation, column checks, and a 1,000-value limit.
 - Timestamp conversion requires an integer column named `at`, `time`, or `timestamp`, or ending in `_at`, `_time`, or `_timestamp`, with a ten-digit value. Linked values are left unchanged.
 - JSON editing supports empty objects and arrays, `jsonb`, and leading whitespace. Formatting preserves object structure and falls back to the original text if number spelling or precision would change. Browser validation reports invalid JSON before submission.
-- JSON previews handle large integers without rounding. The redundant `json-column` plugin has been removed.
+- JSON previews use a compact button and a scrollable modal, preserving large integers without rounding. The redundant `json-column` plugin has been removed.
 - SQL formatting uses local assets.
 
 Column visibility, table groups, sidebar width, and default query favorites are stored in the current browser. Hiding columns changes presentation only.

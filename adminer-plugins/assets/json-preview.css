@@ -1,0 +1,26 @@
+.adminer-json-dialog {
+    box-sizing: border-box;
+    width: min(56rem, calc(100vw - 2rem));
+    max-height: 80vh;
+    padding: 1rem;
+    overflow: auto;
+    border: 1px solid;
+    background: Canvas;
+    color: CanvasText;
+}
+
+.adminer-json-dialog::backdrop {
+    background: rgb(0 0 0 / 40%);
+}
+
+.adminer-json-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.adminer-json-dialog pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
