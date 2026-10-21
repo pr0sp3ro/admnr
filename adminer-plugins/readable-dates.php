@@ -8,42 +8,36 @@
 * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
 * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
 */
-class AdminerReadableDates extends Adminer\Plugin {
-	/** @access protected */
-	var $prepend;
+class AdminerReadableDates extends Adminer\Plugin
+{
+    public function selectVal(&$val, $link, $field, $original)
+    {
+        if ($link || !preg_match('~int~i', $field['type'])
+            || !preg_match('~(?:^|_)(?:at|time|timestamp)$~i', $field['field'])
+            || !is_scalar($original) || !preg_match('~^\d{10}$~', (string) $original)) {
+            return;
+        }
 
-	function __construct() {
-		$this->prepend = <<<EOT
+        $val = '<span class="adminer-timestamp" data-timestamp="' . Adminer\h($original) . '">' . $val . '</span>';
+    }
 
-document.addEventListener('DOMContentLoaded', function(event) {
-	var date = new Date();
-	var tds = document.querySelectorAll('td[id^="val"]');
-	for (var i = 0; i < tds.length; i++) {
-		var text = tds[i].innerHTML.trim();
-		if (text.match(/^\d{10}$/)) {
-			date.setTime(parseInt(text) * 1000);
-			tds[i].oldDate = text;
-
-			// tds[i].newDate = date.toUTCString().substr(5); // UTC format
-			tds[i].newDate = date.toLocaleString();	// Local format
-			// tds[i].newDate = date.toLocaleFormat('%e %b %Y %H:%M:%S'); // Custom format - works in Firefox only
-
-			tds[i].newDate = '<span style="color: #009900">' + tds[i].newDate + '</span>';
-			tds[i].innerHTML = tds[i].newDate;
-			tds[i].dateIsNew = true;
-
-			tds[i].addEventListener('click', function(event) {
-				this.innerHTML = (this.dateIsNew ? this.oldDate : this.newDate);
-				this.dateIsNew = !this.dateIsNew;
-			});
-		}
-	}
+    public function head($dark = null)
+    {
+        echo Adminer\script(<<<'JS'
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.adminer-timestamp').forEach(element => {
+        const timestamp = element.dataset.timestamp;
+        const date = new Date(Number(timestamp) * 1000).toLocaleString();
+        let readable = true;
+        element.textContent = date;
+        element.title = timestamp;
+        element.addEventListener('click', () => {
+            readable = !readable;
+            element.textContent = readable ? date : timestamp;
+            element.title = readable ? timestamp : date;
+        });
+    });
 });
-
-EOT;
-	}
-
-	function head($dark = null) {
-		echo Adminer\script($this->prepend);
-	}
+JS);
+    }
 }

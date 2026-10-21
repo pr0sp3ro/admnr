@@ -177,11 +177,9 @@ class AdminerJsonPreview
             return;
         }
 
-        if ($this->isJson($field, $original) && ($json = json_decode($original, true)) !== null) {
+        if ($this->isJson($field, $original) && is_array($json = json_decode($original, true, 512, JSON_BIGINT_AS_STRING))) {
             $val = "<a class='icon json-icon' href='#' title='JSON' data-index='$counter'>JSON</a> " . $val;
-            if (is_array($json)) {
-                $val .= $this->convertJson($json, 1, $counter++);
-            }
+            $val .= $this->convertJson($json, 1, $counter++);
         }
     }
 
@@ -193,7 +191,7 @@ class AdminerJsonPreview
             return;
         }
 
-        if ($this->isJson($field, $value) && ($json = json_decode($value, true)) !== null && is_array($json)) {
+        if ($this->isJson($field, $value) && is_array($json = json_decode($value, true, 512, JSON_BIGINT_AS_STRING))) {
             echo "<a class='icon json-icon json-link' href='#' title='JSON' data-index='$counter'><span>JSON</span></a><br/>";
             echo $this->convertJson($json, 1, $counter++);
         }
@@ -201,7 +199,8 @@ class AdminerJsonPreview
 
     private function isJson(array $field, $value)
     {
-        return $field["type"] == "json" || (is_string($value) && in_array(substr($value, 0, 1), ['{', '[']));
+        return is_string($value) && (in_array($field['type'], ['json', 'jsonb'], true)
+            || in_array(substr(ltrim($value), 0, 1), ['{', '['], true));
     }
 
     private function convertJson(array $json, $level = 1, $id = 0)

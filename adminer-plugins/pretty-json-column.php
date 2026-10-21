@@ -6,30 +6,44 @@
 * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
 * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
 */
-class AdminerPrettyJsonColumn extends Adminer\Plugin {
-	private function testJson($value) {
-		if ((substr($value, 0, 1) == '{' || substr($value, 0, 1) == '[') && ($json = json_decode($value, true))) {
-			return $json;
-		}
-		return $value;
-	}
+class AdminerPrettyJsonColumn extends Adminer\Plugin
+{
+    public function head($dark = null)
+    {
+        echo Adminer\script_src('adminer-plugins/assets/json-editor.js', true);
+    }
 
-	function editInput($table, $field, $attrs, $value) {
-		$json = $this->testJson($value);
-		if ($json !== $value) {
-			$jsonText = json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-			return "<textarea$attrs cols='50' rows='20' class='jush-js'>" . Adminer\h($jsonText) . "</textarea>";
-		}
-	}
+    public function editInput($table, $field, $attrs, $value)
+    {
+        $native = preg_match('~^jsonb?$~i', $field['type']);
 
-	function processInput($field, $value, $function = '') {
-		if ($function === '') {
-			$json = $this->testJson($value);
-			if ($json !== $value) {
-				$value = json_encode($json);
-			}
-		}
-	}
+        if (!is_string($value) && $value !== null) {
+            return;
+        }
+
+        $text  = trim((string) $value);
+        $json  = json_decode($text);
+        $valid = json_last_error() === JSON_ERROR_NONE;
+
+        if (!$native && (!$valid || !in_array(substr($text, 0, 1), ['{', '['], true))) {
+            return;
+        }
+
+        if ($valid) {
+            $formatted = json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
+
+            // Keep number spelling and precision unchanged when formatting.
+            $numberPattern = '~"(?:[^"\\\\]|\\\\.)*"(*SKIP)(*F)|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?~s';
+            preg_match_all($numberPattern, $text, $originalNumbers);
+            preg_match_all($numberPattern, (string) $formatted, $formattedNumbers);
+
+            if ($formatted !== false && $originalNumbers[0] === $formattedNumbers[0]) {
+                $value = $formatted;
+            }
+        }
+
+        return "<textarea$attrs cols='60' rows='16' class='jush-json adminer-json-editor'>" . Adminer\h($value) . '</textarea>';
+    }
 
 	protected $translations = array(
 		'cs' => array('' => 'V editaci zobrazí syntaxi u JSONu'),

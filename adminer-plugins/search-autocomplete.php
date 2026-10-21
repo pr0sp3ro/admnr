@@ -82,7 +82,6 @@ class searchAutocomplete
                 }
             });
 		});
-		});
 		
 		function populateAutocompleteDataList(e)
 		{

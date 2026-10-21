@@ -35,7 +35,6 @@ return [
     new AdminerFavoriteQuery(),
     new AdminerFormatSql(),
     new AdminerJsonPreview(),
-    new AdminerJsonColumn(),
     new AdminerPrettyJsonColumn(),
     new AdminerEnumOption(),
     new AdminerEditTextarea(),

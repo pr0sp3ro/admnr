@@ -8,7 +8,7 @@
 * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
 */
 class AdminerFormatSql {
-	const DIST = "https://unpkg.com/sql-formatter@15.8.2/dist/";
+	const DIST = "adminer-plugins/assets/";
 
 	function head($dark = null) {
 		echo Adminer\script_src(self::DIST . "sql-formatter.min.js");
@@ -42,10 +42,4 @@ class AdminerFormatSql {
 });
 ");
 	}
-
-	function csp(&$csp) {
-		// source map referenced by the script, loaded by DevTools
-		$csp[0]["connect-src"] .= " " . self::DIST . "sql-formatter.min.cjs.map";
-	}
-
 }
