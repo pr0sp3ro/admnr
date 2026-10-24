@@ -43,6 +43,7 @@ Serve `index.php` with PHP and the database extensions you need. Create a privat
 | `redis` | Adds the Redis driver. |
 | `remote-color` | Marks remote connections with a colored strip. |
 | `search-autocomplete` | Suggests filter values using the other active filters. |
+| `server-aliases` | Adds custom connection names in the sidebar and breadcrumb, saved in the browser. |
 | `select-foreign` | Displays referenced text values instead of foreign key IDs. |
 | `sql-log` | Logs SQL queries to a file, using the temporary directory by default. |
 | `table-groups` | Organizes sidebar tables into custom groups saved in the browser. |
@@ -61,7 +62,15 @@ Serve `index.php` with PHP and the database extensions you need. Create a privat
 - JSON previews use a compact button and a scrollable modal, preserving large integers without rounding. The redundant `json-column` plugin has been removed.
 - SQL formatting uses local assets.
 
-Column visibility, table groups, sidebar width, and default query favorites are stored in the current browser. Hiding columns changes presentation only.
+Column visibility, table groups, sidebar width, connection aliases, and default query favorites are stored in the current browser. Hiding columns changes presentation only.
+
+Click the pencil beside a saved or active connection to rename it. Leave the name empty to restore the server address. Connection aliases are assigned by driver, host, and username and shared across that connection's databases. Hover over an alias to see the original address. Names do not sync between devices.
+
+Initialize or synchronize submodules after cloning or pulling:
+
+```bash
+git submodule update --init --recursive
+```
 
 ## License
 

@@ -1,9 +1,15 @@
 <?php
 
+use Adminer\AdminerColumnHider;
 use Adminer\AdminerDynamicSidebar;
+use Adminer\AdminerServerAliases;
 use Adminer\AdminerTableGroups;
 use Adminer\CopyStructureExport;
 use Adminer\Plugin;
+
+require_once __DIR__ . '/adminer-plugins/column-hider/column-hider.php';
+require_once __DIR__ . '/adminer-plugins/dynamic-sidebar/dynamic-sidebar.php';
+require_once __DIR__ . '/adminer-plugins/server-aliases/server-aliases.php';
 
 $config = require __DIR__ . '/config.local.php';
 
@@ -39,10 +45,17 @@ return [
     new AdminerEnumOption(),
     new AdminerEditTextarea(),
     new AdminerCopy(),
-    new Adminer\AdminerColumnHider(),
+    new AdminerColumnHider(assetsPath: 'adminer-plugins/column-hider/assets'),
     new AdminerTablesFilter(),
     new AdminerTableGroups(),
-    new AdminerDynamicSidebar(),
+    new AdminerDynamicSidebar(
+        cssFile: 'adminer-plugins/dynamic-sidebar/assets/dynamic-sidebar.css',
+        jsFile: 'adminer-plugins/dynamic-sidebar/assets/dynamic-sidebar.js',
+    ),
+    new AdminerServerAliases(
+        cssFile: 'adminer-plugins/server-aliases/assets/server-aliases.css',
+        jsFile: 'adminer-plugins/server-aliases/assets/server-aliases.js',
+    ),
     new AdminerHumanReadableSize(),
     new CopyStructureExport(),
     new DbStructure(),
