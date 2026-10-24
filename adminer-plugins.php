@@ -2,14 +2,14 @@
 
 use Adminer\AdminerColumnHider;
 use Adminer\AdminerDynamicSidebar;
-use Adminer\AdminerServerAliases;
+use Adminer\AdminerSavedConnections;
 use Adminer\AdminerTableGroups;
 use Adminer\CopyStructureExport;
 use Adminer\Plugin;
 
 require_once __DIR__ . '/adminer-plugins/column-hider/column-hider.php';
 require_once __DIR__ . '/adminer-plugins/dynamic-sidebar/dynamic-sidebar.php';
-require_once __DIR__ . '/adminer-plugins/server-aliases/server-aliases.php';
+require_once __DIR__ . '/adminer-plugins/saved-connections/saved-connections.php';
 
 $config = require __DIR__ . '/config.local.php';
 
@@ -52,9 +52,9 @@ return [
         cssFile: 'adminer-plugins/dynamic-sidebar/assets/dynamic-sidebar.css',
         jsFile: 'adminer-plugins/dynamic-sidebar/assets/dynamic-sidebar.js',
     ),
-    new AdminerServerAliases(
-        cssFile: 'adminer-plugins/server-aliases/assets/server-aliases.css',
-        jsFile: 'adminer-plugins/server-aliases/assets/server-aliases.js',
+    new AdminerSavedConnections(
+        cssFile: 'adminer-plugins/saved-connections/assets/saved-connections.css',
+        jsFile: 'adminer-plugins/saved-connections/assets/saved-connections.js',
     ),
     new AdminerHumanReadableSize(),
     new CopyStructureExport(),

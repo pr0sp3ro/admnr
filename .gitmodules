@@ -1,9 +1,9 @@
-[submodule "adminer-plugins/server-aliases"]
-	path = adminer-plugins/server-aliases
-	url = git@github.com:pr0sp3ro/adminer-server-aliases.git
 [submodule "adminer-plugins/column-hider"]
 	path = adminer-plugins/column-hider
 	url = https://github.com/pr0sp3ro/adminer-column-hider.git
 [submodule "adminer-plugins/dynamic-sidebar"]
 	path = adminer-plugins/dynamic-sidebar
 	url = https://github.com/pr0sp3ro/adminer-dynamic-sidebar.git
+[submodule "adminer-plugins/saved-connections"]
+	path = adminer-plugins/saved-connections
+	url = https://github.com/pr0sp3ro/adminer-saved-connections.git

@@ -43,7 +43,7 @@ Serve `index.php` with PHP and the database extensions you need. Create a privat
 | `redis` | Adds the Redis driver. |
 | `remote-color` | Marks remote connections with a colored strip. |
 | `search-autocomplete` | Suggests filter values using the other active filters. |
-| `server-aliases` | Adds custom connection names in the sidebar and breadcrumb, saved in the browser. |
+| `saved-connections` | Saves favorite connections with custom names and removal controls in the browser. |
 | `select-foreign` | Displays referenced text values instead of foreign key IDs. |
 | `sql-log` | Logs SQL queries to a file, using the temporary directory by default. |
 | `table-groups` | Organizes sidebar tables into custom groups saved in the browser. |
@@ -62,9 +62,9 @@ Serve `index.php` with PHP and the database extensions you need. Create a privat
 - JSON previews use a compact button and a scrollable modal, preserving large integers without rounding. The redundant `json-column` plugin has been removed.
 - SQL formatting uses local assets.
 
-Column visibility, table groups, sidebar width, connection aliases, and default query favorites are stored in the current browser. Hiding columns changes presentation only.
+Column visibility, table groups, sidebar width, saved connections, and default query favorites are stored in the current browser. Hiding columns changes presentation only.
 
-Click the pencil beside a saved or active connection to rename it. Leave the name empty to restore the server address. Connection aliases are assigned by driver, host, and username and shared across that connection's databases. Hover over an alias to see the original address. Names do not sync between devices.
+Use Save connection in the login form or sidebar to add a favorite. Use the pencil to rename it or the cross to remove it. Favorites remain saved after failed logins. Only connection parameters and names are stored. Adminer handles passwords and remembered logins. Existing entries and aliases are imported once. Favorites do not sync between devices.
 
 Initialize or synchronize submodules after cloning or pulling:
 
