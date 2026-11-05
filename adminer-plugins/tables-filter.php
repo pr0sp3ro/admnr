@@ -43,7 +43,7 @@ function tablesFilter() {
 			table.setAttribute('data-table-name', text);
 			a.setAttribute('data-link', 'main');
 		} else {
-			a = qs('a[data-link="main"]', table) || qs('a.structure', table);
+			a = qs('a[data-link="main"]', table) || qs('a.structure, a.view', table);
 		}
 		if (!a) continue;
 		if (value == '') {
